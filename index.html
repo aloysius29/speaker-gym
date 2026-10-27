@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d0b">
+  <title>Xlo.builds — Speak with confidence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Xlo builds home"><span class="brand-mark">X.</span><span>Xlo<span class="brand-dot">.builds</span></span></a>
+    <div class="top-note"><span class="live-dot"></span> YOUR DAILY SPEAKING GYM</div>
+    <button id="soundToggle" class="icon-button" aria-label="Toggle sound" title="Toggle sound">♫ <span id="soundLabel">Sound off</span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span>01</span> THINK. SPIN. SPEAK.</div>
+      <h1>Make your words<br> <span class="gradient-text">go further.</span></h1>
+      <p class="hero-copy">One random topic. A little preparation. Five minutes of you speaking without stopping. Build the confidence to talk about anything.</p>
+      <div class="stats">
+        <div><strong id="topicCount">1,200+</strong><span>conversation prompts</span></div>
+        <div><strong>3</strong><span>practice stages</span></div>
+        <div><strong>0</strong><span>judgement</span></div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="wheel-panel panel">
+        <div class="panel-heading">
+          <div><div class="eyebrow small"><span>02</span> TOPIC GENERATOR</div><h2>Spin your next thought.</h2></div>
+          <div class="pill"><span class="live-dot"></span> RANDOM MODE</div>
+        </div>
+        <div class="wheel-layout">
+          <div class="wheel-wrap">
+            <div class="wheel-pointer"></div>
+            <canvas id="wheel" width="520" height="520" aria-label="Spinning topic wheel"></canvas>
+            <div class="wheel-center"><span class="center-small">YOUR NEXT TOPIC</span><span class="center-icon">✳</span><span class="center-brand">Xlo</span></div>
+          </div>
+          <div class="wheel-controls">
+            <label class="field-label" for="categorySelect">PICK YOUR PLAYGROUND</label>
+            <select id="categorySelect">
+              <option value="all">Everything — surprise me</option>
+              <option value="Everyday life">Everyday life</option><option value="Personal growth">Personal growth</option>
+              <option value="College & studies">College & studies</option><option value="Technology">Technology</option>
+              <option value="Sports & fitness">Sports & fitness</option><option value="Football">Football</option>
+              <option value="Entertainment">Entertainment</option><option value="Food & travel">Food & travel</option>
+              <option value="People & society">People & society</option><option value="Creative thinking">Creative thinking</option>
+              <option value="Work & future">Work & future</option><option value="Would you rather">Would you rather</option>
+            </select>
+            <button id="spinBtn" class="primary-button"><span class="spin-symbol">⟳</span> SPIN THE WHEEL <span class="button-arrow">↗</span></button>
+            <div class="topic-result" aria-live="polite">
+              <div class="result-label">YOUR TOPIC <span id="topicCategory">READY WHEN YOU ARE</span></div>
+              <h3 id="topicText">What is one small thing that makes your day better?</h3>
+              <div class="result-actions"><button id="rerollBtn" class="text-button">↻ Another topic</button><button id="copyTopicBtn" class="text-button">▢ Copy topic</button></div>
+            </div>
+            <p class="microcopy">No perfect answers needed. Just keep talking.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="practice-grid">
+        <section class="panel mode-panel">
+          <div class="eyebrow small"><span>03</span> CHOOSE YOUR SESSION</div>
+          <h2>How do you want to practise?</h2>
+          <div class="mode-options">
+            <button class="mode-card active" data-mode="prep">
+              <span class="mode-number">A / QUICK START</span><span class="mode-icon">⚡</span><strong>Prep & speak</strong>
+              <span class="mode-description">Prepare for one minute, then speak.</span><span class="mode-check">✓</span>
+            </button>
+            <button class="mode-card" data-mode="research">
+              <span class="mode-number">B / DEEP DIVE</span><span class="mode-icon">⌕</span><strong>Research & speak</strong>
+              <span class="mode-description">Research first, prepare for one minute, then speak.</span><span class="mode-check">✓</span>
+            </button>
+          </div>
+          <div class="timing-settings">
+            <div class="setting-row"><div><strong>Preparation</strong><span>Fixed time — no changing this one</span></div><div class="time-chip fixed">01:00 <span>FIXED</span></div></div>
+            <div class="setting-row" id="researchSetting"><div><strong>Research time</strong><span>First stage in Deep Dive mode</span></div><div class="stepper"><button data-target="researchMinutes" data-delta="-1" aria-label="Reduce research minutes">−</button><output id="researchMinutes">5</output><button data-target="researchMinutes" data-delta="1" aria-label="Increase research minutes">+</button><span>MIN</span></div></div>
+            <div class="setting-row"><div><strong>Speaking time</strong><span>Your turn to talk</span></div><div class="stepper"><button data-target="speakMinutes" data-delta="-1" aria-label="Reduce speaking minutes">−</button><output id="speakMinutes">5</output><button data-target="speakMinutes" data-delta="1" aria-label="Increase speaking minutes">+</button><span>MIN</span></div></div>
+          </div>
+          <button id="startSessionBtn" class="primary-button full">START SESSION <span class="button-arrow">↗</span></button>
+        </section>
+
+        <section class="panel timer-panel">
+          <div class="timer-top"><div class="eyebrow small"><span>04</span> YOUR FOCUS ZONE</div><span id="stageBadge" class="stage-badge">READY</span></div>
+          <div class="timer-display" id="timerDisplay">01:00</div>
+          <div class="timer-stage" id="timerStage">READY TO PREPARE</div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+          <p id="timerHint" class="timer-hint">When you're ready, start a session. One minute to gather your thoughts.</p>
+          <div class="timer-controls"><button id="timerMainBtn" class="primary-button">▶ START TIMER</button><button id="resetBtn" class="secondary-button" aria-label="Reset timer">↺</button></div>
+          <div class="stage-list"><div class="stage-item current" id="stageResearch"><span>01</span><div><strong>Research</strong><small>Explore the topic</small></div><span class="stage-time" id="researchStageTime">5 min</span></div><div class="stage-item" id="stagePrep"><span>02</span><div><strong>Prepare</strong><small>Organise your thoughts</small></div><span class="stage-time">1 min</span></div><div class="stage-item" id="stageSpeak"><span>03</span><div><strong>Speak</strong><small>Say it out loud</small></div><span class="stage-time" id="speakStageTime">5 min</span></div></div>
+        </section>
+      </div>
+
+      <section class="panel speaking-guide">
+        <div><div class="eyebrow small"><span>05</span> WHEN YOUR MIND GOES BLANK</div><h2>Use this simple speaking map.</h2><p>You don't need fancy vocabulary. A clear idea is enough.</p></div>
+        <div class="guide-steps"><div><span>01</span><strong>Explain it</strong><p>What is it? Describe it simply.</p></div><div><span>02</span><strong>Give an example</strong><p>Tell a story or share an experience.</p></div><div><span>03</span><strong>Say why it matters</strong><p>What do you think or feel about it?</p></div><div><span>04</span><strong>Wrap it up</strong><p>Summarise your main point.</p></div></div>
+      </section>
+      <footer><a class="brand footer-brand" href="#"><span class="brand-mark">X.</span><span>Xlo<span class="brand-dot">.builds</span></span></a><span>SHOW UP. SPEAK UP. LEVEL UP.</span><span>Built for your next 5 minutes.</span></footer>
+    </section>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="topics.js"></script><script src="script.js"></script>
+</body>
+</html>
